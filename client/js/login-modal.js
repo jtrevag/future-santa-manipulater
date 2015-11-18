@@ -15,7 +15,4 @@ $(function() {
 		e.preventDefault();
 	});
     
-    
-    $("#loginModal").load("login-modal.html"); 
-    
 });
