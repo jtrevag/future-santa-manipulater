@@ -6,9 +6,4 @@ router.get('/', function(req, res, next) {
   res.render('index.html');
 });
 
-/* GET login modal */
-router.get('/#login', function(req, res, next) {
-  res.render('login-modal.html');
-});
-
 module.exports = router;
