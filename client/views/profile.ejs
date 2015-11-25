@@ -2,33 +2,163 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="/public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    <!-- Custom CSS -->
+    <link href="/public/css/profile.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="/public/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/public/js/bootstrap.min.js"></script>
+    
+    <script>
+        
+        function toggleFormItems(value){
+            var formItems = document.getElementsByClassName('form-control');
+            for(var x = 0; x < formItems.length; x++){
+                formItems[x].disabled = value;
+            }   
+        }
+        
+        function ToggleButton() {
+            var ProfileButton = document.getElementById('ProfileButton');
+            if (ProfileButton.getAttribute('status') == "edit") {
+                toggleFormItems("");
+                ProfileButton.setAttribute('status', 'save');
+                ProfileButton.innerHTML = "Save Profile";
+                
+            } else {
+                toggleFormItems("disabled");
+                ProfileButton.setAttribute('status', 'edit');
+                ProfileButton.innerHTML = "Edit Profile";
+                //document.getElementById('profile-form').submit();
+            }
+        }
+        
+        $(function(){
+           toggleFormItems("disabled");   
+        });
+        
+        
+      
+    </script>
+    
+    
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
     </style>
 </head>
 <body>
+ <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/views/index.ejs">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="about-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><span class="fa fa-tree"></span> Profile Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="col-md-12">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <div class="row">
+                    <h3 class="col-md-6 ProfileSpan"><span class="fa fa-user"></span> My Profile</h3>
+                    <h3 class="col-md-6 ProfileButton">
+                        <button id="ProfileButton" type="button" status="edit" class="btn btn-default btn-md" onclick="ToggleButton()">Edit Profile</button>
+                    </h3>
+                </div>
+                
 
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>Name</strong>: <%= user.local.firstName + ' ' + user.local.lastName %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
+
+                <form id="profile-form" action="" method="post">
+                    <div class="form-group">
+                        <strong>First Name</strong>
+                        <input type="text" class="form-control" value="<%= user.local.firstName%>" />
+                    </div>
+
+                    <div class="form-group">
+                        <strong>Last Name</strong>
+                        <input type="text" class="form-control" value="<%= user.local.lastName%>" />
+                    </div>
+
+                     <div class="form-group">
+                        <strong>Email</strong>
+                        <input type="text" class="form-control" value="<%= user.local.email%>" />
+                    </div>
+
+                     <div class="form-group">
+                        <strong>Password</strong>
+                        <input type="password" class="form-control" value="<%= user.local.password%>" />
+                    </div>
+
+                     <div class="form-group">
+                        <strong>Confirm Password</strong>
+                        <input type="password" class="form-control"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My favorite color is:</strong>
+                        <input type="text" class="form-control" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My favorite show is:</strong>
+                        <input type="text" class="form-control" />
+                    </div>
+                    
+                     <div class="form-group">
+                        <strong>My favorite team is:</strong>
+                        <input type="text" class="form-control" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My hobbies include:</strong>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>Notes to help your santa:</strong>
+                        <textarea type="text" class="form-control" ></textarea>
+                    </div>
+
+                </form>
+
+                   
 
             </div>
         </div>
