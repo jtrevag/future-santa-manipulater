@@ -1,0 +1,11 @@
+textarea {
+    height: 150px !important;
+}
+
+.ProfileButton{
+    text-align: right;
+}
+
+.ProfileSpan{
+    text-align: left;
+}
