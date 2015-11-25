@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="/public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    <!-- Custom CSS -->
+    <link href="/public/css/profile.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="/public/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/public/js/bootstrap.min.js"></script>
+    
+    <script>
+        
+        function toggleFormItems(value){
+            var formItems = document.getElementsByClassName('form-control');
+            for(var x = 0; x < formItems.length; x++){
+                formItems[x].disabled = value;
+            }   
+        }
+        
+        $(function(){
+           toggleFormItems("disabled");   
+        });
+        
+        
+      
+    </script>
+    
+    
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+ <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/views/index.ejs">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="about-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-tree"></span> Giftee Info </h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-md-12">
+            <div class="well">
+                <div class="row">
+                    <h3 class="col-md-6 ProfileSpan"><span class="fa fa-user"></span> Giftee's Profile</h3>
+                </div>
+                
+                    <div class="form-group">
+                        <strong>First Name</strong>
+                        <div><%= giftee.local.firstName%></div>
+                    </div>
+
+                    <div class="form-group">
+                        <strong>Last Name</strong>
+                        <div><%= giftee.local.lastName%></div>
+                    </div>
+
+                     <div class="form-group">
+                        <strong>Email</strong>
+                        <div><%= giftee.local.email%></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My favorite color is:</strong>
+                        <div><%= giftee.local.color%></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My favorite show is:</strong>
+                        <div><%= giftee.local.show%></div>
+                    </div>
+                    
+                     <div class="form-group">
+                        <strong>My favorite team is:</strong>
+                        <div><%= giftee.local.team%></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>My hobbies include:</strong>
+                        <div><%= giftee.local.hobbies%></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <strong>Notes to help your santa:</strong>
+                        <div><%= giftee.local.notes%></div>
+                    </div>           
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
