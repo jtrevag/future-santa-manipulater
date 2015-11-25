@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
     </style>
@@ -30,6 +30,29 @@
                         <strong>password</strong>: <%= user.local.password %>
                     </p>
 
+            </div>
+        </div>
+        
+        <!-- GROUP INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class='fa fa-heart'></span> Groups</h3>
+                
+                <h4>Groups You Own</h4>
+                <p>
+                    <%= groups %>
+                </p>
+                
+                <h4>Groups You Belong To</h4>
+                <ul>
+                    <% groups.forEach(function(group) { %>
+                        <li><%= group.name %> - <%= group %></li>
+                    <% }); %>
+                </ul>
+                
+                <p>
+                    <a href="/groups" class="btn btn-default btn-sm">Group Management</a>
+                </p>
             </div>
         </div>
 

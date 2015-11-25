@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form id="createGroup" action="/newGroup" method="post" style="display:block">
+            <div class="form-group">
+                <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Group Name" value="">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" tabindex="3" class="" name="private" id="private" value="true">
+                <label for="private"> Private?</label>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Create">
+                    </div>
+                </div>
+            </div>
+        </form>    
+    </div>
+</div>
+</body>
+</html>
