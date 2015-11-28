@@ -113,5 +113,62 @@ module.exports = function(passport) {
         });
 
     }));
+    
+    // =========================================================================
+    // LOCAL PROFILE UPDATE=========================================================
+    // =========================================================================
+    passport.use('local-profile-update', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, email, password, done) { // callback with email and password from our form
+
+        // find a user whose email is the same as the forms email
+        User.findOne({ 'local.email' :  email }, function(err, user) {
+            // if there are any errors, return the error before anything else
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user || !user.validPassword(password))
+            {
+                return done(null, false, req.flash('loginMessage', 'Invalid email or password.')); // req.flash is the way to set flashdata using connect-flash
+            }
+            // make sure passwords are correct
+            else if (password != req.body.confirmPassword) {
+                console.log("Passwords did not match");
+                return done(null, false, req.flash('signupMessage', 'Your passwords did not match.'));
+            }
+            // save the user to the database
+            else
+            {
+                console.log("Successfully validated. Updating user");
+                var updatedUser            = new User();
+                updatedUser.local.firstName = req.body.firstName;
+                updatedUser.local.lastName  = req.body.lastName;    
+                updatedUser.local.email     = email;
+                updatedUser.local.color     = req.body.color;
+                updatedUser.local.show      = req.body.show;
+                updatedUser.local.team      = req.body.team;
+                updatedUser.local.hobbies   = req.body.hobbies;
+                updatedUser.local.notes     = req.body.notes;
+                
+
+                // save the user
+                console.log("Saving user" + updatedUser);
+                updatedUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, updatedUser);
+                });
+            }
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+
+    }));
 
 };

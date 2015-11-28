@@ -118,7 +118,7 @@ function createMatches(personList){
         
         //x is the index of the current person
         for(var x = 0; x < personList.length; x++){
-            //j is the index of all of the person's giftees
+            //w is the index of all of the person's giftees
             for(var w = 0; w < personList[x].potentialGiftees.length; w++){
                 //if we find the person in the list with the same name as the currentPerson's giftee, remove them
                 if(personList[x].potentialGiftees[w].name == currentPerson.giftee){

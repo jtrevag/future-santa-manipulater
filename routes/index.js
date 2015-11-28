@@ -33,6 +33,15 @@ module.exports = function(app, passport) {
             message: req.flash('loginMessage')
         });
     });
+    
+    // =====================================
+    // SIGNUP ==============================
+    // =====================================
+    app.post('/updateUser', passport.authenticate('local-profile-update', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/profile', // redirect back to the home page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // LOGOUT ==============================

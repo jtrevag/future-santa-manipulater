@@ -4,20 +4,20 @@
     <title>Node Authentication</title>
     
     <!-- Bootstrap Core CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
-    <link href="/public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     
     <!-- Custom CSS -->
-    <link href="/public/css/profile.css" rel="stylesheet">
+    <link href="/css/profile.css" rel="stylesheet">
     
     <!-- jQuery -->
-    <script src="/public/js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     
     <script>
         
@@ -33,13 +33,14 @@
             if (ProfileButton.getAttribute('status') == "edit") {
                 toggleFormItems("");
                 ProfileButton.setAttribute('status', 'save');
+                ProfileButton.setAttribute('action', '/updateUser');
                 ProfileButton.innerHTML = "Save Profile";
                 
             } else {
+                ProfileButton.setAttribute('type', 'submit');
                 toggleFormItems("disabled");
                 ProfileButton.setAttribute('status', 'edit');
                 ProfileButton.innerHTML = "Edit Profile";
-                //document.getElementById('profile-form').submit();
             }
         }
         
@@ -93,6 +94,7 @@
 
     <div class="row">
 
+     <form id="profile-form" action="" method="post">
         <!-- LOCAL INFORMATION -->
         <div class="col-md-12">
             <div class="well">
@@ -103,60 +105,57 @@
                     </h3>
                 </div>
                 
+                <div class="form-group">
+                    <strong>First Name</strong>
+                    <input id="firstName" name="firstName" type="text" class="form-control" value="<%= user.local.firstName%>" />
+                </div>
 
+                <div class="form-group">
+                    <strong>Last Name</strong>
+                    <input id="lastName" name="lastName" type="text" class="form-control" value="<%= user.local.lastName%>" />
+                </div>
 
-                <form id="profile-form" action="" method="post">
-                    <div class="form-group">
-                        <strong>First Name</strong>
-                        <input type="text" class="form-control" value="<%= user.local.firstName%>" />
-                    </div>
+                 <div class="form-group">
+                    <strong>Email</strong>
+                    <input id="email" name="email" type="text" class="form-control" value="<%= user.local.email%>" />
+                </div>
 
-                    <div class="form-group">
-                        <strong>Last Name</strong>
-                        <input type="text" class="form-control" value="<%= user.local.lastName%>" />
-                    </div>
+                 <div class="form-group">
+                    <strong>Password</strong>
+                    <input id="password" name="password" type="password" class="form-control" />
+                </div>
 
-                     <div class="form-group">
-                        <strong>Email</strong>
-                        <input type="text" class="form-control" value="<%= user.local.email%>" />
-                    </div>
+                 <div class="form-group">
+                    <strong>Confirm Password</strong>
+                    <input id="confirmPassword" name="confirmPassword" type="password" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <strong>My favorite color is:</strong>
+                    <input id="color" name="color" type="text" class="form-control"  value="<%= user.local.color%>"/>
+                </div>
+                
+                <div class="form-group">
+                    <strong>My favorite show is:</strong>
+                    <input id="show" name="show" type="text" class="form-control" value="<%= user.local.show%>"/>
+                </div>
+                
+                 <div class="form-group">
+                    <strong>My favorite team is:</strong>
+                    <input id="team" name="team" type="text" class="form-control" value="<%= user.local.team%>"/>
+                </div>
+                
+                <div class="form-group">
+                    <strong>My hobbies include:</strong>
+                    <textarea id="hobbies" name="hobbies" type="text" class="form-control" value="<%= user.local.hobbies%>"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <strong>Notes to help your santa:</strong>
+                    <textarea id="notes" name="notes" type="text" class="form-control" value="<%= user.local.notes%>"></textarea>
+                </div>
 
-                     <div class="form-group">
-                        <strong>Password</strong>
-                        <input type="password" class="form-control" value="<%= user.local.password%>" />
-                    </div>
-
-                     <div class="form-group">
-                        <strong>Confirm Password</strong>
-                        <input type="password" class="form-control"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <strong>My favorite color is:</strong>
-                        <input type="text" class="form-control" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <strong>My favorite show is:</strong>
-                        <input type="text" class="form-control" />
-                    </div>
-                    
-                     <div class="form-group">
-                        <strong>My favorite team is:</strong>
-                        <input type="text" class="form-control" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <strong>My hobbies include:</strong>
-                        <textarea type="text" class="form-control"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <strong>Notes to help your santa:</strong>
-                        <textarea type="text" class="form-control" ></textarea>
-                    </div>
-
-                </form>
+            </form>
 
                    
 
