@@ -33,14 +33,16 @@
             if (ProfileButton.getAttribute('status') == "edit") {
                 toggleFormItems("");
                 ProfileButton.setAttribute('status', 'save');
-                ProfileButton.setAttribute('action', '/updateUser');
                 ProfileButton.innerHTML = "Save Profile";
                 
             } else {
+                document.getElementById("profile-form").submit();
+                /*
                 ProfileButton.setAttribute('type', 'submit');
                 toggleFormItems("disabled");
                 ProfileButton.setAttribute('status', 'edit');
                 ProfileButton.innerHTML = "Edit Profile";
+                */
             }
         }
         
@@ -94,7 +96,7 @@
 
     <div class="row">
 
-     <form id="profile-form" action="" method="post">
+     <form id="profile-form" action="/updateUser" method="post">
         <!-- LOCAL INFORMATION -->
         <div class="col-md-12">
             <div class="well">
@@ -147,12 +149,12 @@
                 
                 <div class="form-group">
                     <strong>My hobbies include:</strong>
-                    <textarea id="hobbies" name="hobbies" type="text" class="form-control" value="<%= user.local.hobbies%>"></textarea>
+                    <textarea id="hobbies" name="hobbies" type="text" class="form-control"><%= user.local.hobbies%></textarea>
                 </div>
                 
                 <div class="form-group">
                     <strong>Notes to help your santa:</strong>
-                    <textarea id="notes" name="notes" type="text" class="form-control" value="<%= user.local.notes%>"></textarea>
+                    <textarea id="notes" name="notes" type="text" class="form-control"><%= user.local.notes%></textarea>
                 </div>
 
             </form>

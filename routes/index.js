@@ -37,11 +37,30 @@ module.exports = function(app, passport) {
     // =====================================
     // SIGNUP ==============================
     // =====================================
-    app.post('/updateUser', passport.authenticate('local-profile-update', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/profile', // redirect back to the home page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    app.post('/updateUser', isLoggedIn, function(req, res) {
+        console.log("Called the updateUser function");
+        var user = req.user;
+        console.log("Current user stats: " + user);
+        user.local.firstName = req.body.firstName;
+        user.local.lastName  = req.body.lastName;
+        user.local.color     = req.body.color;
+        user.local.show      = req.body.show;
+        user.local.team      = req.body.team;
+        user.local.hobbies   = req.body.hobbies;
+        user.local.notes     = req.body.notes;
+        console.log("User stats after adding: " + user);
+
+        // save the user
+        console.log("Saving user" + user);
+        user.save(function(err) {
+            if (err)
+                throw err;
+        });
+        
+        res.render('profile.ejs', {
+            user : req.user
+        });
+    });
 
     // =====================================
     // LOGOUT ==============================
