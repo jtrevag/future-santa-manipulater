@@ -6,17 +6,6 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'secret.santa.frondz@gmail.com',
-        pass: 'rovert300691'
-    }
-});
-
-//var apiKey = "7VXmcSj45NS6GwcvPsg1fw";
-var nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'secret.santa.frondz@gmail.com',
         pass: ''
     }
 });
@@ -50,7 +39,7 @@ function createPersonList(){
     personList.push(new personNode("Trevor",    "jtrevag@gmail.com",                        "Christian"));
     personList.push(new personNode("Christian", "cmariek2014@gmail.com",                    "Trevor"));
     personList.push(new personNode("Hudson",    "cooled22@gmail.com",                       "Laura"));
-    personList.push(new personNode("Laura",     "Laura.c.penrod@gmail.com",                       "Hudson"));
+    personList.push(new personNode("Laura",     "Laura.c.penrod@gmail.com",                 "Hudson"));
     personList.push(new personNode("Chad",      "craymer13@gmail.com",                      "Lisa"));
     personList.push(new personNode("Lisa",      "Lisamreynolds22@gmail.com",                "Chad"));
     personList.push(new personNode("Cameron",   "Cameron.Elizabeth.Robertson@gmail.com",    "Nick"));
@@ -201,36 +190,33 @@ function getLeastConnectionsList(personList) {
 }
 
 function sendEmails(personList){
-    for(var i = 0; i < personList.length; i++){
+    for(var i = 0; i < personList.length; i++)
+    {
         var giver = personList[i].name;
         var email = personList[i].email;
         var giftee = personList[i].giftee;
-        //var body = "Hello " + giver + "! You are giving a gift to " + giftee + ". \n Remember, there is a $30 limit and you have until the New Years Party to get your gift. \n Merry Christmas :)";
+        var body = "Hello " + giver + "! You are giving a gift to <b>" + giftee + "</b>. \n Remember, there is a $30 limit and you have until the New Years Party to get your gift. \n Merry Christmas :)";
         var mailOptions;
-        
-        
 
-        if(giver == 'Trevor'){
-            mailOptions = {
-                from: 'Secret Santa Frondz 2015 <secret.santa.frondz@gmail.com>', // sender address 
-                to: email, // list of receivers 
-                subject: 'Secret Santa 2015!!', // Subject line 
-                text: 'Hello ' + giver + '! Please reply to this email to let me know I have your email input correctly and this message is not spam. \n Love, \n Santa', // plaintext body 
-                html: '<p>Hello ' + giver + '! Please reply to this email to let me know I have your email input correctly and this message is not spam.</p> <br/> Love, <br/> Santa' // html body 
-            };
-    
-            transporter.sendMail(mailOptions, function(error, info){
-                if(error){
-                    return console.log(error);
-                }
-                console.log('Message sent to: ' + giver + ' \n ' + info.response);
-             
-            });
-        }
+
+        mailOptions = {
+            from: 'Secret Santa Frondz 2015 <secret.santa.frondz@gmail.com>', // sender address 
+            to: email, // list of receivers 
+            subject: 'YOUR GIFTEE FOR SECRET SANTA 2015', // Subject line 
+            text: body, // plaintext body 
+            html: "<p>" + body + "</p>" // html body 
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                return console.log(error);
+            }
+            console.log(info.response);
+         
+        });
         
     }
-    
-    
+
 }
 
 sortingHat();
