@@ -1,4 +1,5 @@
 //return a list of nodes that have their selected giftee!
+
 //var apiKey = "7VXmcSj45NS6GwcvPsg1fw";
 var nodemailer = require('nodemailer');
 
@@ -22,16 +23,15 @@ function personNode(name, email, excludedPerson) {
 
 function sortingHat(){
     // hit database to create a list of objects and put them in an array.
-    var personList = createPersonList();
+   var personList = createPersonList();
    
-    setupNodes(personList);
+   setupNodes(personList);
    
-    createMatches(personList);
+   createMatches(personList);
    
-    printMatches(personList);
-    
-    sendEmails(personList);
-    
+   printMatches(personList);
+     
+   
 }
 
 function createPersonList(){
@@ -39,7 +39,7 @@ function createPersonList(){
     personList.push(new personNode("Trevor",    "jtrevag@gmail.com",                        "Christian"));
     personList.push(new personNode("Christian", "cmariek2014@gmail.com",                    "Trevor"));
     personList.push(new personNode("Hudson",    "cooled22@gmail.com",                       "Laura"));
-    personList.push(new personNode("Laura",     "Laura.c.penrod@gmail.com",                       "Hudson"));
+    personList.push(new personNode("Laura",     "cooled22@gmail.com",                       "Hudson"));
     personList.push(new personNode("Chad",      "craymer13@gmail.com",                      "Lisa"));
     personList.push(new personNode("Lisa",      "Lisamreynolds22@gmail.com",                "Chad"));
     personList.push(new personNode("Cameron",   "Cameron.Elizabeth.Robertson@gmail.com",    "Nick"));
@@ -49,7 +49,6 @@ function createPersonList(){
     return personList;
 }
 
-// Function to shuffle the array; nothing more, nothing less. 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -77,7 +76,6 @@ function printMatches(personList) {
     }
 }
 
-// Setting up each node and all of the nodes it can give gifts to. 
 function setupNodes(personList){
     // i is the current person we are setting up nodes for
     for(var i = 0; i < personList.length; i++){
@@ -92,24 +90,20 @@ function setupNodes(personList){
     }
 }
 
-// Iterating through all of the people and matching them with someone else.
 function createMatches(personList){
-    // Find the person with the least connections and start there.
     var leastConnectionsIndex = getLeastConnections(personList);
     
-    // Setting up the actual objects. 
     var firstPerson = personList[leastConnectionsIndex];
     var currentPerson = personList[leastConnectionsIndex];
     
     do{
-        // Handling the case where we want to give to the first person, or OMIT the first person.
-        // Create a list of people who have the least connections out of the potentialGiftees the currentPerson can give to. 
+        
+        
+        //Handling the case where we want to give to the first person, or OMIT the first person.
         var gifteeList = getLeastConnectionsList(shuffle(currentPerson.potentialGiftees));
-        // if there is only one person left, give to that person. (It's the firstPerson).
         if(gifteeList.length == 1){
             currentPerson.giftee = gifteeList[0].name;
         } else {
-            // iterate through the people until we find NOT the first person, then assign them as the gift giver.
             for(var z = 0; z < gifteeList.length; z++){
                 if(gifteeList[z].name != firstPerson.name) {
                     currentPerson.giftee = gifteeList[z].name;
@@ -118,8 +112,12 @@ function createMatches(personList){
             }
         }
         
+        
+        
+        //currentPerson.giftee = currentPerson.currentPerson.potentialGiftees[gifteeIndex].name;
         var overallGifteeIndex;
-        //calculate giftee's overall index; that is, the index in the main list. 
+        
+        //calculate giftee's overall index
         for(var y = 0; y < personList.length; y++){
             if(personList[y].name == currentPerson.giftee) {
                 overallGifteeIndex = y;
@@ -146,7 +144,6 @@ function createMatches(personList){
             }
         }
         
-        // the currentPerson is set to the person we just gave a gift to. 
         currentPerson = personList[overallGifteeIndex];
         
     }while(firstPerson != currentPerson);
@@ -154,7 +151,6 @@ function createMatches(personList){
     
 }
 
-// return the index of the person with the smallest index. This is the index of the main list. 
 function getLeastConnections(personList) {
     var min = personList.length;
     var personIndex = 0;
@@ -167,7 +163,6 @@ function getLeastConnections(personList) {
     return personIndex;
 }
 
-// create a list of people who have the minimum number of connections. 
 function getLeastConnectionsList(personList) {
     var leastConnectionList = Array();
     var min = personList.length;
