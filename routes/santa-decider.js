@@ -25,15 +25,15 @@ function sortingHat(){
 
 function createPersonList(){
     var personList = new Array();
-    personList.push(new personNode("Trevor", "a", "Christian"));
-    personList.push(new personNode("Christian", "b", "Trevor"));
-    personList.push(new personNode("Hudson", "c", "Laura"));
-    personList.push(new personNode("Laura", "d", "Hudson"));
-    personList.push(new personNode("Chad", "e", "Lisa"));
-    personList.push(new personNode("Lisa", "f", "Chad"));
-    personList.push(new personNode("Cameron", "f", "Nick"));
-    personList.push(new personNode("Nick", "f", "Cameron"));
-    personList.push(new personNode("Steven", "f", ""));
+    personList.push(new personNode("Trevor",    "jtrevag@gmail.com",                        "Christian"));
+    personList.push(new personNode("Christian", "cmariek2014@gmail.com",                    "Trevor"));
+    personList.push(new personNode("Hudson",    "cooled22@gmail.com",                       "Laura"));
+    personList.push(new personNode("Laura",     "cooled22@gmail.com",                       "Hudson"));
+    personList.push(new personNode("Chad",      "craymer13@gmail.com",                      "Lisa"));
+    personList.push(new personNode("Lisa",      "Lisamreynolds22@gmail.com",                "Chad"));
+    personList.push(new personNode("Cameron",   "Cameron.Elizabeth.Robertson@gmail.com",    "Nick"));
+    personList.push(new personNode("Nick",      "Nicholas.s.Robertson@gmail.com",           "Cameron"));
+    personList.push(new personNode("Steven",    "me@steven-schroeder.com",                  ""));
     shuffle(personList);
     return personList;
 }
